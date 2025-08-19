@@ -14,7 +14,7 @@ export class ServerManager {
     private statusBar: StatusBarManager;
 
     private constructor(logger: Logger, statusBar: StatusBarManager) {
-        this.app = express(express.json({limit: '50mb'}));
+        this.app = express();
         this.logger = logger;
         this.statusBar = statusBar;
         this.setupMiddleware();
