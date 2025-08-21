@@ -1,6 +1,7 @@
 import express from 'express';
 import { Server as HttpServer } from 'http';
 import * as vscode from 'vscode';
+import bodyParser from 'body-parser';
 import { Logger } from '../utils/logger';
 import { StatusBarManager } from '../statusBar/statusBar';
 import modelsRouter from './routes/models';
@@ -14,7 +15,7 @@ export class ServerManager {
     private statusBar: StatusBarManager;
 
     private constructor(logger: Logger, statusBar: StatusBarManager) {
-        this.app = express(express.json({limit: '50mb'}));
+        this.app = express();
         this.logger = logger;
         this.statusBar = statusBar;
         this.setupMiddleware();
@@ -36,7 +37,8 @@ export class ServerManager {
     }
 
     private setupMiddleware(): void {
-        this.app.use(express.json());
+        this.app.use(bodyParser.json({ limit: '100mb' }));
+        this.app.use(bodyParser.urlencoded({ limit: '100mb', extended: true }));
         
         // Custom middleware for request logging and CORS
         this.app.use('/v1', (req: express.Request, res: express.Response, next: express.NextFunction) => {

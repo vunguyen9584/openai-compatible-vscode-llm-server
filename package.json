@@ -89,6 +89,7 @@
     "test": "vscode-test"
   },
   "devDependencies": {
+    "@types/body-parser": "^1.19.6",
     "@types/mocha": "^10.0.10",
     "@types/node": "20.x",
     "@types/vscode": "^1.96.0",
@@ -101,6 +102,7 @@
   },
   "dependencies": {
     "@types/express": "^5.0.0",
+    "body-parser": "^2.2.0",
     "express": "^4.21.2"
   }
 }
